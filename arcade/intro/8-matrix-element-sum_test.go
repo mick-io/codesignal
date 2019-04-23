@@ -89,7 +89,7 @@ func Test_matrixElementSum(t *testing.T) {
 	for _, test := range tests {
 		out := matrixElementsSum(test.in)
 		if out != test.expect {
-			msg := "[FAIL] matrixElementSum(%v) == % expect %"
+			msg := "\n[FAIL] matrixElementSum(%v) == % expect %"
 			t.Errorf(msg, test.in, out, test.expect)
 		}
 	}
