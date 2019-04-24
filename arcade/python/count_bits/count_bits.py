@@ -20,6 +20,7 @@ Input/Output
 
     [execution time limit] 4 seconds (py)
 
+
     [input] integer n
 
     A positive integer.

@@ -56,10 +56,7 @@ func almostIncreasingSequence(sequence []int) bool {
 			y++
 		}
 	}
-	if x > 1 || y > 1 {
-		return false
-	}
-	return true
+	return !(x > 1 || y > 1)
 }
 
 func sumAbsolutes(n int, nums ...int) int {
