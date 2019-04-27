@@ -1,3 +1,5 @@
+const assert = require("assert");
+
 /* add
 
 Write a function that returns the sum of two numbers.
@@ -30,4 +32,46 @@ function add(n1, n2) {
   return n1 + n2;
 }
 
-module.exports = add;
+
+// Unit Test
+(function() {
+  let test = [
+    {
+      n1: 1,
+      n2: 2,
+      expect: 3
+    },
+    {
+      n1: 0,
+      n2: 1000,
+      expect: 1000
+    },
+    {
+      n1: 2,
+      n2: -39,
+      expect: -37
+    },
+    {
+      n1: 99,
+      n2: 100,
+      expect: 199
+    },
+    {
+      n1: -100,
+      n2: 100,
+      expect: 0
+    },
+    {
+      n1: -1000,
+      n2: -1000,
+      expect: -2000
+    }
+  ];
+  test.forEach(test => {
+    let { n1, n2, expect } = test;
+    let out = add(n1, n2);
+    let msg = `[FAIL] add{${n1}, ${n2}} == ${out} expect ${expect}`;
+    assert.strictEqual(out, expect, msg);
+  });
+  console.log("\n[PASSED]")
+})();
