@@ -35,3 +35,19 @@ Input/Output
 
 def countBits(n):
     return n.bit_length()
+
+
+if __name__ == "__main__":
+    assertions = [  # [(n, expect)...]
+        (50, 6),
+        (1, 1),
+        (1000000000, 30),
+        (237487384, 28),
+        (278, 9)
+    ]
+    for n, expect in assertions:
+        out = countBits(n)
+        if out != expect:
+            e = f"[FAIL] countBits({n}) == {out}, expect {expect}"
+            raise AssertionError(e)
+    print("[PASSED]")

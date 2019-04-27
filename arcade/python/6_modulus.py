@@ -33,3 +33,20 @@ def modulus(n):
         return n % 2
     else:
         return -1
+
+
+if __name__ == "__main__":
+    assertions = [  # [(n, expect)...]
+        (15, 1),
+        (23.12, -1),
+        (0, 0),
+        (232.2423, -1),
+        (30, 0),
+        (11, 1)
+    ]
+    for n, expect in assertions:
+        out = modulus(n)
+        if out != expect:
+            e = f"[FAIL] modulus({x}) == {out} expect {expect}"
+            raise AssertionError(e)
+    print("[PASSED]")

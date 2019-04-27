@@ -49,3 +49,24 @@ Guaranteed constraints:
 
 def baseConversion(n, x):
     return hex(int(n, x))[2:]
+
+
+if __name__ == "__main__":
+    assertions = [  # [(n, x, expect)...]
+        ("1302", 5, "ca"),
+        ("1010100101", 2, "2a5"),
+        ("z", 36, "23"),
+        ("30", 4, "c"),
+        ("6", 7, "6"),
+        ("337", 8, "df"),
+        ("ab3f", 16, "ab3f"),
+        ("0", 2, "0"),
+        ("ci", 19, "f6"),
+        ("8c4897", 13, "32b5cc"),
+    ]
+    for n, x, expect in assertions:
+        out = baseConversion(n, x)
+        if out != expect:
+            e = f"[FAIL] baseConversion({n}, {x}) == {out} expect {expect}"
+            raise AssertionError(e)
+    print("[PASSED]")

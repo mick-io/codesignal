@@ -41,3 +41,20 @@ def simpleSort(arr):
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
             j += 1
     return arr
+
+
+if __name__ == "__main__":
+    assertions = [  # [(arr, expect)...]
+        ([2, 4, 1, 5], [1, 2, 4, 5]),
+        ([3, 6, 1, 5, 3, 6], [1, 3, 3, 5, 6, 6]),
+        ([100], [100]),
+        ([-1, -2, 0], [-2, -1, 0]),
+        ([100, 100, 100], [100, 100, 100]),
+        ([1], [1])
+    ]
+    for arr, expect in assertions:
+        out = simpleSort(arr)
+        if out != expect:
+            e = f"[FAIL] simpleSort({arr}) == {out} expect {expect}"
+            raise assertions(e)
+    print("[PASSED]")
