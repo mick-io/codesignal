@@ -72,7 +72,7 @@ func countMines(slices ...[]bool) (nMines int) {
 	return
 }
 
-// Buffering the minefield with false to avoid errors.
+// Buffering the minefield with false to avoid excessive conditionals
 func buffer(matrix [][]bool) [][]bool {
 	for i, bools := range matrix {
 		bools = append([]bool{false}, bools...)
