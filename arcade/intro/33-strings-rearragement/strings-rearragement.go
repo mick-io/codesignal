@@ -50,31 +50,54 @@ Input/Output
 		otherwise).
 */
 
-import (
-	"fmt"
-	"sort"
-)
-
-func stringsRearrangement(slice []string) bool {
-	sort.Strings(slice)
-	fmt.Println(slice)
-	for i, s := range slice[1:] {
-		if nDifferent(s, slice[i-1]) != 1 {
+func stringsRearrangement(s []string) bool {
+	rearraged, s := []string{s[0]}, s[1:]
+	for len(s) != 0 {
+		similar, i := findSimilar(s, rearraged[len(rearraged)-1])
+		if i != -1 {
+			s = append(s[:i], s[i+1:]...)
+			rearraged = append(rearraged, similar)
+			continue
+		}
+		similar, i = findSimilar(s, rearraged[0])
+		if i != -1 {
+			s = append(s[:i], s[i+1:]...)
+			rearraged = append([]string{similar}, rearraged...)
+			continue
+		}
+		ok := false
+		for j, length := 0, len(rearraged); j < length-1; j++ {
+			for k, chars := range s {
+				if nDifferent(chars, rearraged[j]) == 1 && nDifferent(chars, rearraged[j+1]) == 1 {
+					temp := append([]string{chars}, rearraged[k+1:]...)
+					rearraged = append(rearraged[:j], temp...)
+					s = append(s[:k], s[k+1:]...)
+					ok = true
+					break
+				}
+			}
+		}
+		if !ok {
 			return false
 		}
 	}
 	return true
 }
 
-func nDifferent(s1, s2 string) (n int) {
+func findSimilar(slice []string, str string) (similar string, index int) {
+	for i, s := range slice {
+		if nDifferent(s, str) == 1 {
+			return s, i
+		}
+	}
+	return "", -1
+}
+
+func nDifferent(s1, s2 string) (differences int) {
 	runes1, runes2 := []rune(s1), []rune(s2)
-	for _, r1 := range runes1 {
-		for i, r2 := range runes2 {
-			if r1 == r2 {
-				runes2[i] = 0
-			} else {
-				n++
-			}
+	for i, length := 0, len(runes1); i < length; i++ {
+		if runes1[i] != runes2[i] {
+			differences++
 		}
 	}
 	return
